@@ -90,7 +90,7 @@ public final class TokenHandler {
 	private synchronized byte[] createHmac(byte[] content) {
 		return hmac.doFinal(content);
 	}
-
+/*
 	public static void main(String[] args) {
 		Date start = new Date();
 		byte[] secret = new byte[70];
@@ -109,4 +109,5 @@ public final class TokenHandler {
 		}
 		System.out.println(System.currentTimeMillis() - start.getTime());
 	}
+*/
 }

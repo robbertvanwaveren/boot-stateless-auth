@@ -1,11 +1,14 @@
 buildscript {
-    repositories {
-        maven { url "http://repo.spring.io/libs-snapshot" }
-        mavenLocal()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.0.2.RELEASE")
-    }
+  dependencies {
+    classpath('org.springframework.boot:spring-boot-gradle-plugin:1.2.0.M1')
+  }
+  repositories {
+    mavenLocal()	
+    mavenCentral()
+    maven {url 'http://repo.spring.io/milestone'}
+    maven {url 'http://repo.spring.io/release'}
+    maven {url 'http://repo.spring.io/snapshot'}
+  }
 }
 
 apply plugin: 'java'
@@ -15,29 +18,35 @@ apply plugin: 'spring-boot'
 
 // applicationDefaultJvmArgs = ["-Dserver.port=8080", "-Dserver.host=0.0.0.0", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=7000"]
 
-sourceCompatibility = 1.7
-version = '1.0'
+jar {
+  baseName = 'hockeytrainer'
+  sourceCompatibility = 1.7
+  targetCompatibility = 1.7
+}
+
+eclipse {
+  jdt {
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+  }
+}
 
 repositories {
-    mavenCentral()
-    maven {
-        url "http://repo.spring.io/libs-snapshot-local"
-    }
-    maven {
-        url "http://repo.spring.io/plugin-snapshot"
-    }
+  mavenLocal()	
+  mavenCentral()
+  maven {url 'http://repo.spring.io/milestone'}
+  maven {url 'http://repo.spring.io/release'}
+  maven {url 'http://repo.spring.io/snapshot'}
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-autoconfigure")
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-starter-data-jpa")
-    compile("org.springframework.boot:spring-boot-starter-data-rest")
-    compile("org.hibernate:hibernate-validator")
+  compile('org.springframework.boot:spring-boot-autoconfigure')
+  compile('org.springframework.boot:spring-boot-starter-web')
+  compile('org.springframework.boot:spring-boot-starter-data-jpa')
+  compile('org.springframework.boot:spring-boot-starter-security')
+  compile('org.hibernate:hibernate-validator')
 
-    compile("org.springframework.boot:spring-boot-starter-security")
+  testCompile('org.springframework.boot:spring-boot-starter-test')
 
-    runtime("com.h2database:h2")
-
-    testCompile("org.springframework.boot:spring-boot-starter-test")
+  runtime('com.h2database:h2')
 }

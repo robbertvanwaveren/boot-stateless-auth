@@ -19,7 +19,7 @@ apply plugin: 'spring-boot'
 // applicationDefaultJvmArgs = ["-Dserver.port=8080", "-Dserver.host=0.0.0.0", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=7000"]
 
 jar {
-  baseName = 'hockeytrainer'
+  baseName = 'boot-stateless-auth'
   sourceCompatibility = 1.7
   targetCompatibility = 1.7
 }

@@ -1,8 +1,11 @@
 package com.jdriven.stateless.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -11,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
+@Configuration
 @Order(1)
 public class StatelessAuthenticationSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -33,10 +37,10 @@ public class StatelessAuthenticationSecurityConfig extends WebSecurityConfigurer
 				.headers().cacheControl().and()
 				.authorizeRequests()
 								
-				//allow anonymous font and template requests
+				//allow anonymous resource requests
 				.antMatchers("/").permitAll()
-				.antMatchers("/fonts/**").permitAll()
-				.antMatchers("/templates/**").permitAll()
+				.antMatchers("/favicon.ico").permitAll()
+				.antMatchers("/resources/**").permitAll()
 				
 				//allow anonymous POSTs to login
 				.antMatchers(HttpMethod.POST, "/api/login").permitAll()
@@ -55,6 +59,12 @@ public class StatelessAuthenticationSecurityConfig extends WebSecurityConfigurer
 
 				// custom Token based authentication based on the header previously given to the client
 				.addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class);
+	}
+	
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
 	}
 
 	@Override

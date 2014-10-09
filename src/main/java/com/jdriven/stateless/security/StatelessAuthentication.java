@@ -50,9 +50,4 @@ public class StatelessAuthentication {
 		characterEncodingFilter.setForceEncoding(true);
 		return characterEncodingFilter;
 	}
-
-	@Bean
-	public StatelessAuthenticationSecurityConfig applicationSecurity() {
-		return new StatelessAuthenticationSecurityConfig();
-	}
 }

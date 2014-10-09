@@ -33,7 +33,7 @@ public class StatelessAuthenticationIntegrationTest {
 
 	@Test
 	public void testResource_Get_Anonymous() {
-		doAnonymousExchange(HttpMethod.GET, "/js/controllers.js");
+		doAnonymousExchange(HttpMethod.GET, "/resources/js/controllers.js");
 	}
 
 	// CHANGE OWN USER PASSWORD

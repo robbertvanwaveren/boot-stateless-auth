@@ -1,9 +1,6 @@
 package com.jdriven.stateless.security;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -15,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class UserAuthority implements GrantedAuthority {
 
 	@NotNull
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
 	@Id
 	private User user;
